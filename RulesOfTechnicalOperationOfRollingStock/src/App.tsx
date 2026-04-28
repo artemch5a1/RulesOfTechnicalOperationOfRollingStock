@@ -24,6 +24,8 @@ function App() {
   const [guardantDialogMessage, setGuardantDialogMessage] = useState('');
   const [isBackendLoading, setIsBackendLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioBlobUrlRef = useRef<string | null>(null);
+  const soundPlaybackGenerationRef = useRef(0);
 
   const imgRef = useRef<HTMLImageElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -370,12 +372,22 @@ function App() {
     { top: '83%', left: '1.4%' },
   ];
 
-  const stopSound = () => {
+  const disposeCurrentSoundMedia = () => {
     if (audioRef.current) {
       audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      audioRef.current.removeAttribute('src');
+      audioRef.current.load();
       audioRef.current = null;
     }
+    if (audioBlobUrlRef.current) {
+      URL.revokeObjectURL(audioBlobUrlRef.current);
+      audioBlobUrlRef.current = null;
+    }
+  };
+
+  const stopSound = () => {
+    soundPlaybackGenerationRef.current += 1;
+    disposeCurrentSoundMedia();
     setPlayingSoundId(null);
   };
 
@@ -385,26 +397,54 @@ function App() {
       return;
     }
 
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
+    soundPlaybackGenerationRef.current += 1;
+    const generation = soundPlaybackGenerationRef.current;
 
-    const audio = new Audio(`assets/soundAlarm/sound/${String(soundId).padStart(2, '0')}.mp3`);
-    audioRef.current = audio;
+    disposeCurrentSoundMedia();
     setPlayingSoundId(soundId);
 
-    audio.onended = () => {
-      setPlayingSoundId(null);
-      audioRef.current = null;
-    };
+    const soundPath = `${import.meta.env.BASE_URL}assets/soundAlarm/sound/${String(soundId).padStart(2, '0')}.mp3`;
+    const soundUrl = new URL(soundPath, window.location.href).href;
 
-    audio.currentTime = 0;
-    audio.play().catch((error) => {
-      console.error('Failed to play sound', error);
-      setPlayingSoundId(null);
-      audioRef.current = null;
-    });
+    void (async () => {
+      try {
+        const res = await fetch(soundUrl);
+        if (!res.ok) {
+          throw new Error(`Sound fetch failed: ${res.status}`);
+        }
+        const blob = await res.blob();
+        if (generation !== soundPlaybackGenerationRef.current) {
+          return;
+        }
+        const objectUrl = URL.createObjectURL(blob);
+        if (generation !== soundPlaybackGenerationRef.current) {
+          URL.revokeObjectURL(objectUrl);
+          return;
+        }
+        audioBlobUrlRef.current = objectUrl;
+
+        const audio = new Audio(objectUrl);
+        audioRef.current = audio;
+
+        audio.onended = () => {
+          if (audioBlobUrlRef.current === objectUrl) {
+            URL.revokeObjectURL(objectUrl);
+            audioBlobUrlRef.current = null;
+          }
+          audioRef.current = null;
+          setPlayingSoundId(null);
+        };
+
+        audio.currentTime = 0;
+        await audio.play();
+      } catch (error) {
+        console.error('Failed to play sound', error);
+        if (generation === soundPlaybackGenerationRef.current) {
+          disposeCurrentSoundMedia();
+          setPlayingSoundId(null);
+        }
+      }
+    })();
   };
 
   const headerText = activeSidebarTab === 'sound'

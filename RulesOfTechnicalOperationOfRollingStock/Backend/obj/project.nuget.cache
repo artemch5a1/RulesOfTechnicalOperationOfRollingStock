@@ -1,13 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "A1ncWRSD4TI=",
+  "dgSpecHash": "99CLTDC66m4=",
   "success": true,
-  "projectFilePath": "F:\\Repository\\RulesOfTechnicalOperationOfRollingStock\\RulesOfTechnicalOperationOfRollingStock\\Backend\\Backend.csproj",
+  "projectFilePath": "/home/artem/Документы/GitHub/RulesOfTechnicalOperationOfRollingStock/RulesOfTechnicalOperationOfRollingStock/Backend/Backend.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\volkov.a\\.nuget\\packages\\bk-s\\1.3.1\\bk-s.1.3.1.nupkg.sha512",
-    "C:\\Users\\volkov.a\\.nuget\\packages\\guardantdotnetcoreapi\\1.0.0\\guardantdotnetcoreapi.1.0.0.nupkg.sha512",
-    "C:\\Users\\volkov.a\\.nuget\\packages\\guardantdotnetcoreapi.native.linux-any64\\1.0.0\\guardantdotnetcoreapi.native.linux-any64.1.0.0.nupkg.sha512",
-    "C:\\Users\\volkov.a\\.nuget\\packages\\guardantdotnetcoreapi.native.win-any\\1.0.0\\guardantdotnetcoreapi.native.win-any.1.0.0.nupkg.sha512"
+    "/home/artem/.nuget/packages/bk-s/1.3.1/bk-s.1.3.1.nupkg.sha512",
+    "/home/artem/.nuget/packages/guardantdotnetcoreapi/1.0.0/guardantdotnetcoreapi.1.0.0.nupkg.sha512",
+    "/home/artem/.nuget/packages/guardantdotnetcoreapi.native.linux-any64/1.0.0/guardantdotnetcoreapi.native.linux-any64.1.0.0.nupkg.sha512",
+    "/home/artem/.nuget/packages/guardantdotnetcoreapi.native.win-any/1.0.0/guardantdotnetcoreapi.native.win-any.1.0.0.nupkg.sha512",
+    "/home/artem/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/8.0.26/microsoft.netcore.app.runtime.linux-x64.8.0.26.nupkg.sha512",
+    "/home/artem/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/8.0.26/microsoft.aspnetcore.app.runtime.linux-x64.8.0.26.nupkg.sha512",
+    "/home/artem/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.26/microsoft.netcore.app.host.linux-x64.8.0.26.nupkg.sha512"
   ],
   "logs": []
 }

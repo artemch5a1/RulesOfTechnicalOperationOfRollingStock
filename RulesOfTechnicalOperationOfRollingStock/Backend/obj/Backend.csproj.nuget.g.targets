@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)guardantdotnetcoreapi.native.win-any\1.0.0\build\GuardantDotNetCoreApi.Native.Win-Any.targets" Condition="Exists('$(NuGetPackageRoot)guardantdotnetcoreapi.native.win-any\1.0.0\build\GuardantDotNetCoreApi.Native.Win-Any.targets')" />
-    <Import Project="$(NuGetPackageRoot)guardantdotnetcoreapi.native.linux-any64\1.0.0\build\GuardantDotNetCoreApi.Native.Linux-Any64.targets" Condition="Exists('$(NuGetPackageRoot)guardantdotnetcoreapi.native.linux-any64\1.0.0\build\GuardantDotNetCoreApi.Native.Linux-Any64.targets')" />
+    <Import Project="$(NuGetPackageRoot)guardantdotnetcoreapi.native.win-any/1.0.0/build/GuardantDotNetCoreApi.Native.Win-Any.targets" Condition="Exists('$(NuGetPackageRoot)guardantdotnetcoreapi.native.win-any/1.0.0/build/GuardantDotNetCoreApi.Native.Win-Any.targets')" />
+    <Import Project="$(NuGetPackageRoot)guardantdotnetcoreapi.native.linux-any64/1.0.0/build/GuardantDotNetCoreApi.Native.Linux-Any64.targets" Condition="Exists('$(NuGetPackageRoot)guardantdotnetcoreapi.native.linux-any64/1.0.0/build/GuardantDotNetCoreApi.Native.Linux-Any64.targets')" />
   </ImportGroup>
 </Project>
